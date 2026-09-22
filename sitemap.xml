@@ -5,4 +5,34 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://8gytkpwtmv-png.github.io/daxilo-tools.github.io/word-counter.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://8gytkpwtmv-png.github.io/daxilo-tools.github.io/json-formatter.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://8gytkpwtmv-png.github.io/daxilo-tools.github.io/url-encoder.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://8gytkpwtmv-png.github.io/daxilo-tools.github.io/base64.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://8gytkpwtmv-png.github.io/daxilo-tools.github.io/image-compressor.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://8gytkpwtmv-png.github.io/daxilo-tools.github.io/uuid-generator.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>
