@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="DAXILO — бесплатные онлайн-инструменты для текста, JSON, URL, Base64 и изображений.">
+<title>DAXILO — бесплатные онлайн-инструменты</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e5e7eb;--accent:#111827}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:#111827;color:#fff;padding:22px 18px}header .bar{max-width:1120px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:28px;font-weight:800;letter-spacing:.5px}.tag{color:#cbd5e1;font-size:14px;margin-top:3px}
+main{max-width:1120px;margin:auto;padding:28px 18px 60px}.hero{padding:18px 0 24px}.hero h1{font-size:clamp(30px,6vw,52px);margin:0 0 10px}.hero p{font-size:18px;color:var(--muted);margin:0}
+.search{margin:20px 0}.search input{width:100%;font-size:17px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:white}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 22px}.filter{border:1px solid var(--line);background:#fff;color:var(--text);border-radius:999px;padding:9px 14px;cursor:pointer}.filter.active{background:#111827;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 5px 18px rgba(16,24,40,.04)}.card h2{margin:0 0 7px;font-size:21px}.desc{color:var(--muted);font-size:14px;margin-bottom:12px}
+textarea,input[type=text],input[type=url]{width:100%;font:inherit;padding:11px 12px;border:1px solid #ccd2dc;border-radius:10px;background:#fff}textarea{resize:vertical;min-height:95px}
+button{border:0;border-radius:10px;background:#111827;color:#fff;padding:10px 13px;margin:4px 3px 4px 0;cursor:pointer}button.secondary{background:#eef2f7;color:#172033}.out{white-space:pre-wrap;word-break:break-word;margin-top:10px;background:#f8fafc;border-radius:10px;padding:10px;min-height:20px}
+.small{font-size:12px;color:var(--muted)}.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:13px;margin-top:38px}
+</style>
+</head>
+<body>
+<header><div class="bar"><div><div class="logo">DAXILO</div><div class="tag">Простые цифровые инструменты в одном месте</div></div></div></header>
+<main>
+<section class="hero"><h1>Бесплатные онлайн-инструменты</h1><p>Работают прямо в браузере. Файлы для основных инструментов обрабатываются на вашем устройстве.</p></section>
+<div class="search"><input id="search" placeholder="Поиск инструмента…"></div>
+<nav>
+<button class="filter active" data-cat="all">Все</button><button class="filter" data-cat="text">Текст</button><button class="filter" data-cat="data">Данные</button><button class="filter" data-cat="image">Изображения</button>
+</nav>
+
+<div class="grid" id="grid">
+
+<section class="card tool" data-cat="text" data-name="счетчик слов символов">
+<h2>Счётчик слов</h2><div class="desc">Количество слов, символов и строк.</div>
+<textarea id="w" placeholder="Введите текст"></textarea><div id="wo" class="out">Слов: 0 · Символов: 0 · Строк: 0</div>
+</section>
+
+<section class="card tool" data-cat="text" data-name="регистр текста верхний нижний заглавные">
+<h2>Регистр текста</h2><div class="desc">Верхний, нижний и формат заглавных букв.</div>
+<textarea id="c" placeholder="Введите текст"></textarea>
+<button onclick="co('u')">ВЕРХНИЙ</button><button onclick="co('l')">нижний</button><button onclick="co('t')">Заглавные</button>
+<textarea id="co" readonly placeholder="Результат"></textarea>
+</section>
+
+<section class="card tool" data-cat="data" data-name="json formatter форматировать">
+<h2>JSON Formatter</h2><div class="desc">Проверка и красивое форматирование JSON.</div>
+<textarea id="j" placeholder='{"name":"DAXILO"}'></textarea><button onclick="jf()">Форматировать</button><button class="secondary" onclick="jmin()">Сжать</button><div id="jo" class="out"></div>
+</section>
+
+<section class="card tool" data-cat="data" data-name="url encode decode кодирование">
+<h2>URL Encoder / Decoder</h2><div class="desc">Кодирование и декодирование URL-текста.</div>
+<textarea id="u" placeholder="hello world"></textarea><button onclick="ue()">Encode</button><button onclick="ud()">Decode</button><div id="uo" class="out"></div>
+</section>
+
+<section class="card tool" data-cat="data" data-name="base64 encode decode">
+<h2>Base64</h2><div class="desc">Кодирование и декодирование текста в Base64.</div>
+<textarea id="b" placeholder="Введите текст"></textarea><button onclick="be()">Encode</button><button onclick="bd()">Decode</button><div id="bo" class="out"></div>
+</section>
+
+<section class="card tool" data-cat="image" data-name="сжатие изображения jpg jpeg png">
+<h2>Сжатие изображения</h2><div class="desc">Уменьшает размер изображения в браузере.</div>
+<input id="im" type="file" accept="image/*"><br><button onclick="cp()">Сжать и скачать JPG</button><div id="io" class="out"></div>
+</section>
+
+<section class="card tool" data-cat="image" data-name="конвертер изображений png jpg jpeg webp">
+<h2>Конвертер изображений</h2><div class="desc">PNG/JPEG/WebP — выберите формат и скачайте файл.</div>
+<input id="conv" type="file" accept="image/*"><br>
+<select id="fmt" style="padding:10px;border:1px solid #ccd2dc;border-radius:10px;margin:7px 0;width:100%"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp">WebP</option></select>
+<button onclick="convertImg()">Конвертировать</button><div id="coi" class="out"></div>
+</section>
+
+<section class="card tool" data-cat="text" data-name="удалить пробелы whitespace">
+<h2>Очистка текста</h2><div class="desc">Удаление лишних пробелов и пустых строк.</div>
+<textarea id="clean" placeholder="Вставьте текст"></textarea><button onclick="cleanText()">Очистить</button><div id="clo" class="out"></div>
+</section>
+
+<section class="card tool" data-cat="text" data-name="повторитель текста повторить">
+<h2>Повторитель текста</h2><div class="desc">Повторяет строку заданное количество раз.</div>
+<input id="repText" type="text" placeholder="Текст"><input id="repN" type="text" inputmode="numeric" placeholder="Количество, например 5">
+<button onclick="repeatText()">Повторить</button><div id="repo" class="out"></div>
+</section>
+
+<section class="card tool" data-cat="data" data-name="uuid генератор uuid">
+<h2>UUID Generator</h2><div class="desc">Создание случайного UUID v4.</div>
+<button onclick="uuid()">Сгенерировать UUID</button><div id="uuo" class="out"></div>
+</section>
+
+<section class="card tool" data-cat="data" data-name="timestamp unix время">
+<h2>Unix Timestamp</h2><div class="desc">Текущее Unix-время и перевод timestamp в дату.</div>
+<button onclick="nowTs()">Текущий timestamp</button><input id="ts" type="text" inputmode="numeric" placeholder="Например 1780000000"><button onclick="fromTs()">Перевести</button><div id="tso" class="out"></div>
+</section>
+
+</div>
+<footer>DAXILO • Бесплатные браузерные инструменты</footer>
+</main>
+
+<script>
+const q=id=>document.getElementById(id);
+q('w').oninput=()=>{let x=q('w').value;q('wo').textContent='Слов: '+(x.trim()?x.trim().split(/\s+/).length:0)+' · Символов: '+x.length+' · Строк: '+(x?x.split(/\n/).length:0)};
+function co(t){let x=q('c').value;if(t==='u')x=x.toUpperCase();if(t==='l')x=x.toLowerCase();if(t==='t')x=x.toLowerCase().replace(/(^|[\s.!?])\S/g,a=>a.toUpperCase());q('co').value=x}
+function jf(){try{q('jo').textContent=JSON.stringify(JSON.parse(q('j').value),null,2)}catch(e){q('jo').textContent='Ошибка JSON: проверьте синтаксис'}}
+function jmin(){try{q('jo').textContent=JSON.stringify(JSON.parse(q('j').value))}catch(e){q('jo').textContent='Ошибка JSON'}}
+function ue(){q('uo').textContent=encodeURIComponent(q('u').value)}function ud(){try{q('uo').textContent=decodeURIComponent(q('u').value)}catch(e){q('uo').textContent='Ошибка декодирования'}}
+function be(){try{q('bo').textContent=btoa(unescape(encodeURIComponent(q('b').value)))}catch(e){q('bo').textContent='Ошибка'}}
+function bd(){try{q('bo').textContent=decodeURIComponent(escape(atob(q('b').value)))}catch(e){q('bo').textContent='Ошибка Base64'}}
+function cp(){let f=q('im').files[0];if(!f){q('io').textContent='Выберите изображение';return}let im=new Image();im.onload=()=>{let c=document.createElement('canvas'),s=Math.min(1,1600/Math.max(im.width,im.height));c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext('2d').drawImage(im,0,0,c.width,c.height);c.toBlob(b=>download(b,'daxilo-compressed.jpg'),'image/jpeg',.78);q('io').textContent='Готово'};im.src=URL.createObjectURL(f)}
+function convertImg(){let f=q('conv').files[0];if(!f){q('coi').textContent='Выберите изображение';return}let im=new Image();im.onload=()=>{let c=document.createElement('canvas');c.width=im.width;c.height=im.height;c.getContext('2d').drawImage(im,0,0);let type=q('fmt').value,ext=type==='image/png'?'png':type==='image/webp'?'webp':'jpg';c.toBlob(b=>download(b,'daxilo-image.'+ext),type,.9);q('coi').textContent='Готово'};im.src=URL.createObjectURL(f)}
+function download(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function cleanText(){q('clo').textContent=q('clean').value.replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n').trim()}
+function repeatText(){let n=Math.min(1000,Math.max(1,parseInt(q('repN').value)||1));q('repo').textContent=Array(n).fill(q('repText').value).join('\n')}
+function uuid(){q('uuo').textContent=crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{let r=Math.random()*16|0,v=c==='x'?r:(r&3|8);return v.toString(16)})}
+function nowTs(){q('tso').textContent=Math.floor(Date.now()/1000)}
+function fromTs(){let n=Number(q('ts').value);q('tso').textContent=Number.isFinite(n)?new Date(n*1000).toLocaleString():'Неверный timestamp'}
+const filters=document.querySelectorAll('.filter'),cards=document.querySelectorAll('.tool'),search=q('search');
+function filter(){let cat=document.querySelector('.filter.active').dataset.cat,term=search.value.toLowerCase();cards.forEach(c=>{let ok=(cat==='all'||c.dataset.cat===cat)&&c.dataset.name.includes(term);c.classList.toggle('hidden',!ok)})}
+filters.forEach(b=>b.onclick=()=>{filters.forEach(x=>x.classList.remove('active'));b.classList.add('active');filter()});search.oninput=filter;
+</script>
+</body>
+</html>
